@@ -47,8 +47,11 @@
 
     client.on('message', function(message) {
 
-      console.log("Message Received")
-      console.log(message);
+      console.log('Message Received');
+
+      message.sender = client.id;
+
+      client.emit('message', message);
 
     });
 

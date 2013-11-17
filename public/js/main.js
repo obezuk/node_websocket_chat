@@ -13,14 +13,22 @@ $(document).ready(function() {
 				recipient : recipient || null
 			}
 
-			console.log(data);
+			console.log('Sending Message');
 
 			chat.socket.emit('message', data);
 		
 		}
 
 		chat.socket.on('message', function(data) {
+			console.log('Received Message');
 			console.log(data);
+
+			dt = $('<dt></dt>').html(data.sender);
+			dd = $('<dd></dd>').html(data.message);
+
+			$('#listMessages').append(dt);
+			$('#listMessages').append(dd);
+
 		    // socket.emit('my other event', { my: 'data' });
 		});
 
@@ -29,6 +37,8 @@ $(document).ready(function() {
 			event.preventDefault();
 
 			message = $('#inputMessage').val();
+
+			$('#inputMessage').val('');
 			// console.log(message);
 
 			chat.send(message);
