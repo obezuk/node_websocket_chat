@@ -7,6 +7,7 @@
   },
   "dependencies": {
   	"express" : "latest",
-  	"socket.io" : "latest"
+  	"socket.io" : "latest",
+    "redis" : "latest"
   }
 }

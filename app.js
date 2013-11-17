@@ -4,6 +4,12 @@
 
   http = require('http');
 
+  redis = require("redis").createClient();
+  
+  redis.on("error", function (err) {
+    console.log("Error " + err);
+  });
+
   app.configure(function() {
 
     app.set('port', process.env.PORT || 3000);
@@ -45,6 +51,28 @@
 
     console.log('Client Connected');
 
+    redis.zrange('messages', 0, -1, function(err, data) {
+
+      if (err) {
+        console.log(err);
+      } else {
+        // console.log(data);
+
+        for (var d in data) {
+
+          // console.log(data[d]);
+
+          // console.log(typeofdata[d]);
+
+          i = JSON.parse(data[d]);
+
+          client.emit('message', i);
+        }
+
+      }
+
+    });
+
     client.on('message', function(message) {
 
       console.log('Message Received');
@@ -52,6 +80,10 @@
       message.sender = client.id;
 
       io.sockets.emit('message', message);
+
+      key = (new Date().getTime());
+
+      redis.zadd('messages', key, JSON.stringify(message));
 
     });
 
