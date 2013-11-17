@@ -19,7 +19,7 @@
     app.use(app.router);
 
     path = require('path');
-    
+
     app.use(express.static(path.join(__dirname, 'public')));
 
   });
@@ -45,8 +45,15 @@
 
     console.log('Client Connected');
 
+    client.on('message', function(message) {
+
+      console.log("Message Received")
+      console.log(message);
+
+    });
+
   	client.on('disconnect', function() {
   		// Do Disconnect Event
-      });
+    });
 
   });

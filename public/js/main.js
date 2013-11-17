@@ -12,6 +12,10 @@ $(document).ready(function() {
 				message : message,
 				recipient : recipient || null
 			}
+
+			console.log(data);
+
+			chat.socket.emit('message', data);
 		
 		}
 
@@ -25,10 +29,15 @@ $(document).ready(function() {
 			event.preventDefault();
 
 			message = $('#inputMessage').val();
-			console.log(message);
+			// console.log(message);
 
+			chat.send(message);
 
 		});
+
+		$("formMessage > input,select,textarea").not("[type=submit]").jqBootstrapValidation({
+
+		}); // Validation
 		
 		return chat;
 	
