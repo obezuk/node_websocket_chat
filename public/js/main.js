@@ -26,8 +26,8 @@ $(document).ready(function() {
 			dt = $('<dt></dt>').html(data.sender);
 			dd = $('<dd></dd>').html(data.message);
 
-			$('#listMessages').append(dt);
-			$('#listMessages').append(dd);
+			$('#listMessages').prepend(dd);
+			$('#listMessages').prepend(dt);
 
 		    // socket.emit('my other event', { my: 'data' });
 		});

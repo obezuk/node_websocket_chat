@@ -51,7 +51,7 @@
 
       message.sender = client.id;
 
-      client.emit('message', message);
+      io.sockets.emit('message', message);
 
     });
 
