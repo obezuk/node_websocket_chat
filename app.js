@@ -19,6 +19,7 @@
     app.use(app.router);
 
     path = require('path');
+    
     app.use(express.static(path.join(__dirname, 'public')));
 
   });
@@ -41,6 +42,8 @@
   io.on('connection', function (client) {
 
   	// Do Login Event
+
+    console.log('Client Connected');
 
   	client.on('disconnect', function() {
   		// Do Disconnect Event
